@@ -1,0 +1,67 @@
+/* Styles */
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 10px;
+    background-color: #f3f4f6;
+    color: #333;
+}
+
+/* Header styles */
+.header {
+    background-color: #4a69bd;
+    color: #fff;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 18px;
+}
+
+/* Container for content */
+.content {
+    margin-top: 10px;
+}
+
+/* Styles for buttons */
+.button {
+    background-color: #78e08f;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #38ada9;
+}
+
+/* Styles for input fields */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Styles for labels */
+.label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Footer styles */
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #777;
+}
