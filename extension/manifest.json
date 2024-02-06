@@ -1,10 +1,10 @@
 {
-  "name": "Hello Extensions",
+  "name": "SmartMail",
   "description": "Base Level Extension",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-    "default_popup": "hello.html",
+    "default_popup": "popup.html",
     "default_icon": "hello_extensions.png"
   },
   "permissions": [
@@ -13,7 +13,7 @@
   "oauth2": {
     "client_id": "872268352009-ittm6d1f7qhtbh5octcl1ofa627pmci5.apps.googleusercontent.com",
     "scopes": [
-      "https://www.googleapis.com/auth/gmail.readonly"
+      "https://www.googleapis.com/auth/gmail.regitadonly"
     ]
   }
   
