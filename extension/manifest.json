@@ -6,5 +6,15 @@
   "action": {
     "default_popup": "hello.html",
     "default_icon": "hello_extensions.png"
+  },
+  "permissions": [
+    "identity"
+  ],
+  "oauth2": {
+    "client_id": "872268352009-ittm6d1f7qhtbh5octcl1ofa627pmci5.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly"
+    ]
   }
+  
 }
