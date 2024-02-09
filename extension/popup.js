@@ -1,22 +1,29 @@
 import { getAuthToken } from './auth.js';
 
-// Ensure the DOM is fully loaded before trying to access the element
-window.addEventListener('DOMContentLoaded', (event) => {
-  var redirectButton = document.getElementById('redirectButton');
-  if (redirectButton) {
-    redirectButton.addEventListener('click', function() {
-      chrome.tabs.create({ url: 'mainpage.html' }); // This will open mainpage.html in a new tab
-    });
-  } else {
-    console.error('redirectButton not found');
-  }
+function fetchAndDisplayUserInfo() {
+  chrome.identity.getProfileUserInfo({accountStatus: 'ANY'}, function(userInfo) {
+    if (userInfo.email) {
+      document.getElementById('userInfo').textContent = `Email: ${userInfo.email}`;
+      document.getElementById('authButton').style.display = 'none';
+      document.getElementById('redirectButton').style.display = 'block';
+    } else {
+      document.getElementById('authButton').style.display = 'block';
+      document.getElementById('redirectButton').style.display = 'none';
+    }
+  });
+}
 
-  var authButton = document.getElementById('authButton');
-  if (authButton) {
-    authButton.addEventListener('click', function() {
-      getAuthToken(); // Call the function to authenticate the user
+function redirectToMainPage() {
+  chrome.tabs.create({ url: 'mainpage.html' });
+}
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  document.getElementById('redirectButton').addEventListener('click', redirectToMainPage);
+  document.getElementById('authButton').addEventListener('click', function() {
+    getAuthToken().then(() => {
+      fetchAndDisplayUserInfo();
     });
-  } else {
-    console.error('authButton not found');
-  }
+  });
+
+  fetchAndDisplayUserInfo(); // Call on popup load
 });

@@ -10,7 +10,14 @@ export function getAuthToken() {
     } else if (token) {
       // The token is valid, use it to make your API calls
       console.log('Obtained token:', token);
-      // Proceed with using the token
+      // Save token to Local Storage
+      chrome.storage.local.set({token: 'your_oauth_token'}, function() {
+        console.log('Token is saved in chrome.storage.local');
+      });
+      //Check token:
+      chrome.storage.local.get('token', function(result) {
+        console.log('Token currently is ' + result.token);
+      });
     } else {
       // No token was obtained, and there was no error, which is unusual
       console.error('The OAuth Token was undefined, and there was no lastError.');
