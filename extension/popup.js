@@ -12,8 +12,14 @@ function fetchUserEmail(token) {
       .then(data => {
         if (data.emailAddresses && data.emailAddresses.length > 0) {
           console.log('User email:', data.emailAddresses[0].value);
+          document.getElementById('userInfo').textContent =
+              `Email: ${data.emailAddresses[0].value}`;
+          document.getElementById('authButton').style.display = 'none';
+          document.getElementById('redirectButton').style.display = 'block';
         } else {
           console.log('Email address not found.');
+          document.getElementById('authButton').style.display = 'block';
+          document.getElementById('redirectButton').style.display = 'none';
         }
       })
       .catch(error => {
