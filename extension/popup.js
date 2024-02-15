@@ -46,6 +46,4 @@ window.addEventListener('DOMContentLoaded', (event) => {
       });
     });
   });
-
-  fetchAndDisplayUserInfo();  // Call on popup load
 });
