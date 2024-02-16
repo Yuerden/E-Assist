@@ -4,9 +4,50 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 10px;
-    background-color: #f3f4f6;
+    background-color: #ccae17;
     color: #333;
 }
+
+#body1{
+    height: 100%;
+    background-color: #1c95dc;
+    background-image: linear-gradient(#57EBFF, #45e385);
+}
+
+#body2{
+    height: 100vh;
+    background-color: #1c95dc;
+    background-image: linear-gradient(#57EBFF, #45e385);
+    border-radius: 30px;
+    margin: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow: hidden;
+}
+
+#title{
+
+    display: flex;
+    justify-content: center;
+    color: black; 
+    font-size: 80px; 
+    font-family: League Spartan; 
+    font-weight: 400; 
+    margin:10px;
+
+}
+
+#emailSummaryContainer{
+    height: 80vh; 
+    background: #ffffff; 
+    border-radius: 30px;
+}
+/* finish this for the return button*/
+#more_sum_but{
+    display: flex;
+    justify-content: center;
+}
+
 
 /* Header styles */
 .header {
