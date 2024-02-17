@@ -19,3 +19,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
     console.error('loadButton not found')
   }
 });
+
+/* Carousel JS (Find a way to integrate into load button above)*/
+const carousel = document.querySelector('.carousel');
+const prevButton = document.querySelector('.prev-button');
+const nextButton = document.querySelector('.next-button');
+let currentIndex = 0;
+
+function slideNext() {
+  currentIndex = (currentIndex + 1) % carousel.children.length;
+  updateSlide();
+}
+
+function slidePrev() {
+  currentIndex = (currentIndex - 1 + carousel.children.length) % carousel.children.length;
+  updateSlide();
+}
+
+function updateSlide() {
+  const slideWidth = carousel.children[0].offsetWidth;
+  carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+}
+
+nextButton.addEventListener('click', slideNext);
+prevButton.addEventListener('click', slidePrev);
+

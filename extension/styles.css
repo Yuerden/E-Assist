@@ -38,16 +38,10 @@ body {
 }
 
 #emailSummaryContainer{
-    height: 80vh; 
+    height: 95vh; 
     background: #ffffff; 
     border-radius: 30px;
 }
-/* finish this for the return button*/
-#more_sum_but{
-    display: flex;
-    justify-content: center;
-}
-
 
 /* Header styles */
 .header {
@@ -78,6 +72,14 @@ body {
     border-radius: 5px;
 }
 
+/* finish this for the return button*/
+#container{
+    display: flex;
+    justify-content: center; /* Horizontal center */
+    align-items: center;
+    text-align: center;
+}
+
 .button:hover {
     background-color: #38ada9;
 }
@@ -106,3 +108,71 @@ body {
     font-size: 12px;
     color: #777;
 }
+
+
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    width: 100%; /* Adjust the width as needed */
+    height: 500px;
+    overflow: hidden;
+    display: flex;
+    text-align: center;
+  }
+  
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+.slide {
+    flex: 0 0 auto;
+    width: 100%; /* Ensure each slide takes up the full width */
+    padding: 20px;
+    background-color: #f0f0f0; /* Set background color */
+    border: 1px solid #ccc; /* Add border for visual separation */
+  }
+  
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    
+
+    background-color: #78e08f;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+.next-button {
+    left: 0;
+    top: 90%;
+    left: 80%;
+    
+  }
+.prev-button {
+    right: 0;
+    top: 90%;
+    right: 80%;
+
+}
+  
+.prev-button:hover,
+.next-button:hover {
+    background-color: #38ada9;
+  }
+  
