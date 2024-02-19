@@ -1,4 +1,4 @@
-import {getEmailList} from './emailDigest.js';
+import {EmailGetter} from './getEmails.js';
 // This function will be called when the Load Summaries button is clicked
 function loadSummaries() {
   console.log('summaries...');
@@ -17,7 +17,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var loadButton = document.getElementById('loadButton');
   if (loadButton) {
     loadButton.addEventListener('click', function() {
-      getEmailList();
+      chrome.storage.local.get('token', function(result) {
+        var emailGetter = new EmailGetter(result.token);
+        emailGetter.getEmailList()
+      });
     });
   } else {
     console.error('loadButton not found')
