@@ -2,15 +2,17 @@
 <html>
 <head>
     <title>SmartMail Main Page</title>
-    <link rel="stylesheet" type="text/css" href="style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
     <h1>Welcome to the MainPage</h1>
     <div id="emailSummaryContainer">
         <button  id="loadButton" class="button">Load Summaries</button>
+        <button  id="nextEmail" class="button">></button>
         <!-- Email summaries will be loaded here -->
     </div>
         <!-- Email summaries will be loaded here -->
-    <script src="mainpageScripts.js"></script> <!-- Link to your JavaScript file -->
+    <script src="emailDigest.js"></script>
+    <script type="module" src="mainpageScripts.js"></script>
 </body>
 </html>
