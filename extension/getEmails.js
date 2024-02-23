@@ -1,94 +1,120 @@
 export class EmailGetter {
-  constructor(token) {
-    this.token = token;
+  constructor() {
+    chrome.storage.local.get('token', (result) => {
+      this.token = result.token;
+      this.initEmailList();
+    });
     this.messageList = null;
     this.nextPageToken = null;
     this.emailPointer = 0;
-
-    this.getEmailList()
   }
 
-  getNextPage() {
-    if (this.nextPageToken === null) {
-      console.log('No next page token available, cannot fetch next page.');
-      return;
+  async initEmailList() {
+    await this.getEmailList();
+  }
+
+  async getEmailList() {
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${this.token}`);
+
+    let url = `https://gmail.googleapis.com/gmail/v1/users/me/messages`;
+    if (this.nextPageToken) {
+      url += `?pageToken=${this.nextPageToken}`;
     }
 
-    const headers = new Headers();
-    headers.append('Authorization', `Bearer ${this.token}`);
-
     const requestOptions = {
       method: 'GET',
       headers: headers,
     };
 
-    const url =
-        `https://gmail.googleapis.com/gmail/v1/users/me/messages?pageToken=${
-            this.nextPageToken}`;
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.json();
+      if (data.messages && data.messages.length > 0) {
+        this.messageList = data.messages;
+        this.emailPointer = 0;
+      }
+      if (data.nextPageToken) {
+        this.nextPageToken = data.nextPageToken;
+      }
 
-    fetch(url, requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          if (data.messages && data.messages.length > 0) {
-            this.messageList = data.messages;
-            this.emailPointer = 0;
-          } else {
-            console.log('No more messages to fetch.');
-            this.messageList = null;
-          }
-          if (data.nextPageToken) {
-            this.nextPageToken = data.nextPageToken;
-          } else {
-            this.nextPageToken = null;
-          }
-        })
-        .catch(
-            error =>
-                console.error('Error fetching next page of messages:', error));
+      console.log(
+          'Estimated number of total messages:', data.resultSizeEstimate);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    }
   }
 
-
-  getEmailList() {
-    const headers = new Headers();
-    headers.append('Authorization', `Bearer ${this.token}`);
-
-    const requestOptions = {
-      method: 'GET',
-      headers: headers,
-    };
-
-    const userId = 'me';
-
-    // Fetch URL without any query parameters
-    fetch(
-        `https://gmail.googleapis.com/gmail/v1/users/${userId}/messages`,
-        requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          if (data.messages && data.messages.length > 0) {
-            this.messageList = data.messages;
-          }
-          if (data.nextPageToken) {
-            this.nextPageToken = data.nextPageToken;
-          }
-
-          console.log(
-              'Estimated number of total messages:', data.resultSizeEstimate);
-        })
-        .catch(error => console.error('Error fetching messages:', error));
-  }
-
-  getNextEmail() {
+  async getNextEmail() {
     if (!this.messageList || this.emailPointer >= this.messageList.length) {
-      this.getNextPage();
+      await this.getEmailList();
       if (!this.messageList || this.emailPointer >= this.messageList.length) {
         return null;
       }
     }
 
-    const email = this.messageList[this.emailPointer];
+    const emailId = this.messageList[this.emailPointer].id;
     this.emailPointer += 1;
 
-    return email;
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${this.token}`);
+
+    const requestOptions = {
+      method: 'GET',
+      headers: headers,
+    };
+
+    try {
+      const response = await fetch(
+          `https://gmail.googleapis.com/gmail/v1/users/me/messages/${
+              emailId}?format=full`,
+          requestOptions);
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      const emailData = {sender: '', subject: '', body: '', timestamp: ''};
+
+      // Extract headers for sender, subject, and date
+      data.payload.headers.forEach(header => {
+        if (header.name === 'From') {
+          emailData.sender = header.value;
+        } else if (header.name === 'Subject') {
+          emailData.subject = header.value;
+        } else if (header.name === 'Date') {
+          emailData.timestamp = header.value;
+        }
+      });
+
+      // Decode email body
+      let bodyData = '';
+      if (data.payload.parts) {
+        data.payload.parts.forEach(part => {
+          if (part.mimeType === 'text/plain' && part.body && part.body.data) {
+            bodyData += this.decodeBase64(part.body.data);
+          }
+        });
+      } else if (data.payload.body.data) {
+        bodyData = this.decodeBase64(data.payload.body.data);
+      }
+      emailData.body = bodyData;
+
+      console.log('Processed email data:', emailData);
+      return emailData;
+    } catch (error) {
+      console.error('Error fetching email:', error);
+      return null;
+    }
+  }
+
+  decodeBase64(encodedString) {
+    const decodedString =
+        atob(encodedString.replace(/-/g, '+').replace(/_/g, '/'));
+    const textDecoder = new TextDecoder('utf-8');
+    const decodedBytes =
+        Uint8Array.from(decodedString.split(''), c => c.charCodeAt(0));
+    return textDecoder.decode(decodedBytes);
   }
 }
