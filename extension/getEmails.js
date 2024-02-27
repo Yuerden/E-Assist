@@ -4,6 +4,9 @@ export class EmailGetter {
       this.token = result.token;
       this.initEmailList();
     });
+    chrome.storage.local.get('openaiApiKey', (result) => {
+      this.GPTKey = result.openaiApiKey;
+    });
     this.messageList = null;
     this.nextPageToken = null;
     this.emailPointer = 0;
@@ -120,11 +123,8 @@ export class EmailGetter {
   }
 
   async summarizeEmail(emailContent) {
-    const apiKey = '';                                         // Replace with
-                                                               // your actual
-                                                               // API key
-    const url = 'https://api.openai.com/v1/chat/completions';  // The base URL
-                                                               // for OpenAI API
+    const url = 'https://api.openai.com/v1/chat/completions';
+    console.log(this.GPTKey);
 
     const data = {
       model: 'gpt-3.5-turbo',  // Adjust model as necessary
@@ -163,7 +163,7 @@ export class EmailGetter {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
+          'Authorization': `Bearer ${this.GPTKey}`
         },
         body: JSON.stringify(data)
       });
