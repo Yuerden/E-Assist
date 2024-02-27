@@ -33,3 +33,15 @@ export function getAuthToken() {
     });
   });
 }
+
+async function getApiKey() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(['apiKey'], function(result) {
+      if (result.apiKey) {
+        resolve(result.apiKey);
+      } else {
+        reject('API key not found.');
+      }
+    });
+  });
+}
