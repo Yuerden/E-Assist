@@ -14,7 +14,10 @@
   "oauth2": {
     "client_id": "872268352009-ittm6d1f7qhtbh5octcl1ofa627pmci5.apps.googleusercontent.com",
     "scopes": [
-      "https://www.googleapis.com/auth/gmail.readonly"
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/gmail.readonly", 
+      "https://www.googleapis.com/auth/gmail.modify"
     ]
   }
   
