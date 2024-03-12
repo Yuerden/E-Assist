@@ -48,7 +48,7 @@ function updateSlide() {
   // const slideWidth = carousel.children[0].offsetWidth;
   // carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 
-  const offset = -currentIndex * 100.6; //This is weird as fuck gotta change later
+  const offset = -currentIndex * 100.57; //This is weird as fuck gotta change later, left movement too big right move ment too small
   carousel.style.transform = `translateX(${offset}%)`;
 
 }
@@ -58,6 +58,7 @@ function addSlide() {
   const slide = document.createElement('div');
   slide.classList.add('slide');
   slide.textContent = 'New Email Slide ' + (currentIndex + 1);
+  
   carousel.appendChild(slide);
 }
 
