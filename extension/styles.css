@@ -4,8 +4,43 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 10px;
-    background-color: #f3f4f6;
+    background-color: #ccae17;
     color: #333;
+}
+
+#body1{
+    height: 100%;
+    background-color: #1c95dc;
+    background-image: linear-gradient(#57EBFF, #45e385);
+}
+
+#body2{
+    height: 100vh;
+    background-color: #1c95dc;
+    background-image: linear-gradient(#57EBFF, #45e385);
+    border-radius: 30px;
+    margin: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow: hidden;
+}
+
+#title{
+
+    display: flex;
+    justify-content: center;
+    color: black; 
+    font-size: 80px; 
+    font-family: League Spartan; 
+    font-weight: 400; 
+    margin:10px;
+
+}
+
+#emailSummaryContainer{
+    height: 95vh; 
+    background: #ffffff; 
+    border-radius: 30px;
 }
 
 /* Header styles */
@@ -37,6 +72,14 @@ body {
     border-radius: 5px;
 }
 
+/* finish this for the return button*/
+#container{
+    display: flex;
+    justify-content: center; /* Horizontal center */
+    align-items: center;
+    text-align: center;
+}
+
 .button:hover {
     background-color: #38ada9;
 }
@@ -65,3 +108,73 @@ body {
     font-size: 12px;
     color: #777;
 }
+
+
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    display: flex; /*Something about display flex makes the slides get larger and larger*/
+    text-align: center;
+  }
+  
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+  }
+  
+.slide {
+    flex: 0 0 auto;
+    width: 95%; /* Ensure each slide takes up the full width */
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    background-color: #f0f0f0; /* Set background color */
+    border: 1px solid #ccc; /* Add border for visual separation */
+  }
+  
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    
+
+    background-color: #78e08f;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+.next-button {
+    left: 0;
+    top: 90%;
+    left: 80%;
+    
+  }
+.prev-button {
+    right: 0;
+    top: 90%;
+    right: 80%;
+
+}
+  
+.prev-button:hover,
+.next-button:hover {
+    background-color: #38ada9;
+  }
+  
