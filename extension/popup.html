@@ -3,13 +3,16 @@
 <head>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body id="body1">
     <h1>Smart Mail</h1>
     <div id="userInfo"></div> <!-- Container for user email -->
+
     <input id="openaiApiKey" type="text" placeholder="Enter OpenAI API Key" class="input" style="display:none;">
     <button id="authButton" class="button">Authorize</button>
     <button id="saveApiKeyButton" class="button" style="display:none;">Save OpenAI API Key</button>
+    <button id="freeButton" class="button" style="display:none;">Skip</button>
     <button id="redirectButton" class="button" style="display:none;">Start Scanning</button>
+
     <script type="module" src="popup.js"></script>
 </body>
 </html>

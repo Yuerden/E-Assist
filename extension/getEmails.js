@@ -123,6 +123,13 @@ export class EmailGetter {
   }
 
   async summarizeEmail(emailContent) {
+    if(this.GPTKey === 'FREE_VERSION'){
+      //do free version
+      console.log('You are using the free version, currently no Summaries Available');
+      return 'You are using the free version, currently no Summaries Available';
+    }
+    //else continue using chatGPT bellow:
+
     const url = 'https://api.openai.com/v1/chat/completions';
     console.log(this.GPTKey);
 
