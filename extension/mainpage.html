@@ -2,24 +2,16 @@
 <html>
 <head>
     <title>SmartMail Main Page</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Link to your CSS file -->
 </head>
-<body id = "body2">
-    <div id = "emailSummaryContainer">
-
-        <h1 id = "title">SmartMail</h1>
-        
-        <div class="carousel-container">
-            <div class="carousel">
-              <!-- THIS IS WHERE THE EMAIL SUMMARY SLIDES ARE ADDED -->
-            </div>
-        </div>
-        
-        <!-- BUTTONS -->
-        <button id="loadButton" class="prev-button">Load Prev Summary</button>
-        <button id="loadButton" class="next-button">Load Next Summary</button>
-
+<body>
+    <h1>Welcome to the MainPage</h1>
+    <div id="emailSummaryContainer">
+        <button  id="loadButton" class="button">Load Summaries</button>
+        <button  id="nextEmail" class="button">></button>
+        <!-- Email summaries will be loaded here -->
     </div>
-    <script src="mainpageScripts.js"></script> <!-- Link to your JavaScript file -->
+        <!-- Email summaries will be loaded here -->
+    <script type="module" src="mainpageScripts.js"></script>
 </body>
 </html>
