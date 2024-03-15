@@ -60,12 +60,32 @@ window.addEventListener('DOMContentLoaded', (event) => {
     });
 
     document.getElementById('freeButton').addEventListener('click', function() {
-        // User chooses to skip OpenAI API key entry
-        document.getElementById('openaiApiKey').style.display = 'none';
-        document.getElementById('saveApiKeyButton').style.display = 'none';
-        document.getElementById('freeButton').style.display = 'none'; // Hide Skip button
-        document.getElementById('redirectButton').style.display = 'block'; // Show redirect button
+        // Set the API key to a specific string that indicates the free version
+        const freeVersionKey = 'FREE_VERSION'; // This can be any string that indicates a free version
+        chrome.storage.local.set({ 'openaiApiKey': freeVersionKey }, () => {
+            console.log('Set to free version.');
+            // Adjust UI: hide API key input and both buttons, and show the redirect button
+            document.getElementById('openaiApiKey').style.display = 'none';
+            document.getElementById('saveApiKeyButton').style.display = 'none';
+            document.getElementById('freeButton').style.display = 'none';
+            document.getElementById('redirectButton').style.display = 'block';
+        });
     });
+
+    /**
+    Now, wherever devs check the API key in the extension (for example, when deciding which features to enable or when making API calls),
+    they should check if the key equals FREE_VERSION and adjust the behavior accordingly:
+
+    chrome.storage.local.get('openaiApiKey', function(data) {
+        if (data.openaiApiKey === 'FREE_VERSION') {
+            // Handle the free version case
+        } else {
+            // Handle the normal case with a real API key
+        }
+    });
+
+     */
+    
 
     document.getElementById('redirectButton').addEventListener('click', redirectToMainPage);
 });
