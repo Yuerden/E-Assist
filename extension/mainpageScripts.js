@@ -1,11 +1,10 @@
-import {EmailGetter} from './getEmails.js';
 // This function will be called when the Load Summaries button is clicked
 function loadSummaries() {
   console.log('summaries...');
 }
 
-// This function simulates fetching email summaries, replace with your actual
-// data fetching logic function fetchEmailSummaries() {}
+// This function simulates fetching email summaries, replace with your actual data fetching logic
+// function fetchEmailSummaries() {}
 
 // This function handles the display of email summaries on the page
 // function displayEmailSummaries(summaries) {}
