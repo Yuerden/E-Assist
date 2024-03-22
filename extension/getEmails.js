@@ -140,7 +140,6 @@ export class EmailGetter {
     //else continue using chatGPT bellow:
 
     const url = 'https://api.openai.com/v1/chat/completions';
-    console.log(this.GPTKey);
 
     const data = {
       model: 'gpt-3.5-turbo',  // Adjust model as necessary
@@ -189,7 +188,7 @@ export class EmailGetter {
       }
 
       const jsonResponse = await response.json();
-      summary=jsonResponse.choices[0].message;
+      summary=jsonResponse.choices[0].message.content;
       console.log(summary);  // This is ChatGPT's response
       return summary;
     } catch (error) {
