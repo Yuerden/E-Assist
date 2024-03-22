@@ -10,6 +10,7 @@ export class EmailGetter {
     this.messageList = null;
     this.nextPageToken = null;
     this.emailPointer = 0;
+    this.currentEmailBody = null;
   }
 
   async initEmailList() {
@@ -105,7 +106,8 @@ export class EmailGetter {
       emailData.body = bodyData;
 
       console.log('Processed email data:', emailData);
-      this.summarizeEmail(emailData)
+      // this.summarizeEmail(emailData)
+      this.currentEmailBody=emailData;
       return emailData;
     } catch (error) {
       console.error('Error fetching email:', error);
@@ -122,11 +124,18 @@ export class EmailGetter {
     return textDecoder.decode(decodedBytes);
   }
 
-  async summarizeEmail(emailContent) {
+  async summarizeEmail() {
+    let summary = "";
+    if(this.currentEmailBody === null){
+      summary = 'There is no current email loaded at this time, please click Get Next Email Button'
+      console.log(summary);
+      return summary;
+    }
     if(this.GPTKey === 'FREE_VERSION'){
       //do free version
-      console.log('You are using the free version, currently no Summaries Available');
-      return 'You are using the free version, currently no Summaries Available';
+      summary = 'You are using the free version, currently no Summaries Available';
+      console.log(summary);
+      return summary;
     }
     //else continue using chatGPT bellow:
 
@@ -141,13 +150,13 @@ export class EmailGetter {
             `Given the following email content, generate a concise summary that includes the subject, key points, any action required, the overall sentiment, and any additional notes that are important. Ensure the summary is clear and captures all critical details without missing important information.
         
         Email sender:
-        "${emailContent.sender}
+        "${this.currentEmailBody.sender}
         "Email subject:
-        "${emailContent.subject}"
+        "${this.currentEmailBody.subject}"
         Email body:
-        "${emailContent.body}"
+        "${this.currentEmailBody.body}"
         Email timestamp:
-        "${emailContent.timestamp}"
+        "${this.currentEmailBody.timestamp}"
         
         Please format the summary as follows:
         Summary of Email:
@@ -180,9 +189,9 @@ export class EmailGetter {
       }
 
       const jsonResponse = await response.json();
-      console.log(
-          jsonResponse.choices[0].message);  // This is ChatGPT's response
-      return jsonResponse.choices[0].message;
+      summary=jsonResponse.choices[0].message;
+      console.log(summary);  // This is ChatGPT's response
+      return summary;
     } catch (error) {
       console.error('Error calling ChatGPT:', error.message);
     }
@@ -222,4 +231,5 @@ export class EmailGetter {
   //     }
   //   }
   // }
+
 }

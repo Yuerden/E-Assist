@@ -6,6 +6,11 @@ import {EmailGetter} from './getEmails.js';
 function displayEmailBody(emailData) {
     // Assuming emailData contains the body of the email
     document.getElementById('emailBodyContainer').textContent = emailData.body; // Use innerHTML if you need to render HTML content, but ensure it is sanitized to prevent XSS attacks.
+    displaySummary(""); //Wipes current summary
+}
+function displaySummary(summary) {
+  // Assuming emailData contains the body of the email
+  document.getElementById('emailSummaryContainer').textContent = summary; // Use innerHTML if you need to render HTML content, but ensure it is sanitized to prevent XSS attacks.
 }
 
 // This function will be called when the Load Summaries button is clicked
@@ -27,10 +32,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.error('loadButton not found')
     }
     
-    var nextEmailButton = document.getElementById('nextEmail');
+    var nextEmailButton = document.getElementById('summarize');
     if (nextEmailButton) {
         nextEmailButton.addEventListener('click', function() {
-            emailGetter.getNextEmail().then(displayEmailBody); // Same here for fetching next email
+            emailGetter.summarizeEmail().then(displaySummary); // Same here for fetching next email
         });
     }
 });
