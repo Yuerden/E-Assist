@@ -158,7 +158,6 @@ export class EmailGetter {
         "${this.currentEmailBody.timestamp}"
         
         Please format the summary as follows:
-        Summary of Email:
         - Subject: [Subject of the Email]
         - Key Points:
           - [Point 1]
