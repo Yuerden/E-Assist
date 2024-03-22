@@ -5,9 +5,7 @@ export function getAuthToken() {
         // Directly log the lastError object to the console
         console.error('Authentication failed:', chrome.runtime.lastError);
         // You can also stringify the object to inspect its properties
-        console.error(
-            'Authentication failed (stringified):',
-            JSON.stringify(chrome.runtime.lastError, null, 2));
+        console.error('Authentication failed (stringified):',JSON.stringify(chrome.runtime.lastError, null, 2));
         reject('fail1');
         // Alert the stringified error message
         alert(
