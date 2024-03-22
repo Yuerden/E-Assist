@@ -163,7 +163,7 @@ body {
 }
   
 .prev-button,
-.next-button, .email-button {
+.next-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -196,14 +196,6 @@ body {
     top: 90%;
     right: 80%;
 
-}
-
-.email-button{
-    right: 0;
-    left: 0;
-    top: 90%;
-    right: 30%;
-    left: 30%;
 }
   
 .prev-button:hover,
