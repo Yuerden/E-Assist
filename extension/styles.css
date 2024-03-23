@@ -139,7 +139,7 @@ body {
 .carousel-container {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 71%;
     overflow: hidden;
     display: flex; /*Something about display flex makes the slides get larger and larger*/
     text-align: center;

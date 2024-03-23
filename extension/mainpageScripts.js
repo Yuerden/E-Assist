@@ -19,12 +19,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     console.error('loadButton not found')
   }
 });
-
+var inner_width = $('body').innerWidth();
+$(window).resize(function() {
+  inner_width = $('body').innerWidth();
+});
 /* Carousel JS (Find a way to integrate into load button above)*/
 const carousel = document.querySelector('.carousel');
 const prevButton = document.querySelector('.prev-button');
 const nextButton = document.querySelector('.next-button');
 let currentIndex = 0;
+
 
 /*Initial Email Summary Slide*/
 addSlide();
@@ -48,7 +52,7 @@ function updateSlide() {
   // const slideWidth = carousel.children[0].offsetWidth;
   // carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 
-  const offset = -currentIndex * 100.57; //This is weird as fuck gotta change later, left movement too big right move ment too small
+  const offset = -currentIndex * inner_width; //This is weird as fuck gotta change later, left movement too big right move ment too small
   carousel.style.transform = `translateX(${offset}%)`;
 
 }
@@ -62,7 +66,7 @@ function addSlide() {
   carousel.appendChild(slide);
 }
 
-/* When Button is clicked run functions respectively*/
+/* When Button is clicked run function  s respectively*/
 nextButton.addEventListener('click', slideNext);
 prevButton.addEventListener('click', slidePrev);
 
