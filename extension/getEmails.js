@@ -103,7 +103,7 @@ export class EmailGetter {
       } else if (data.payload.body.data) {
         bodyData = this.decodeBase64(data.payload.body.data);
       }
-      emailData.body = bodyData.replace(/<[^>]+>/g, '');
+      emailData.body = bodyData.replace(/<[^>]+>/g, '').replace(/{[^>]+}/g, '');
 
       console.log('Processed email data:', emailData);
       // this.summarizeEmail(emailData)
