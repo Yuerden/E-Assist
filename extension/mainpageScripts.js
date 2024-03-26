@@ -2,7 +2,6 @@
 
 import {EmailGetter} from './getEmails.js';
 
-// Define a new function to display the email body
 function displayEmailBody(emailData) {
     // Assuming emailData contains the body of the email
     document.getElementById('emailBodyContainer').textContent = emailData.body; // Use innerHTML if you need to render HTML content, but ensure it is sanitized to prevent XSS attacks.
@@ -11,12 +10,6 @@ function displayEmailBody(emailData) {
 function displaySummary(summary) {
   // Assuming emailData contains the body of the email
   document.getElementById('emailSummaryContainer').textContent = summary; // Use innerHTML if you need to render HTML content, but ensure it is sanitized to prevent XSS attacks.
-}
-
-// This function will be called when the Load Summaries button is clicked
-function loadSummaries() {
-    console.log('summaries...');
-    // Implement your summary fetching logic here
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
