@@ -1,7 +1,7 @@
-// This function will be called when the Load Summaries button is clicked
-function loadSummaries() {
-  console.log('summaries...');
-}
+// // This function will be called when the Load Summaries button is clicked
+// function loadSummaries() {
+//   console.log('summaries...');
+// }
 
 // This function simulates fetching email summaries, replace with your actual data fetching logic
 // function fetchEmailSummaries() {}
@@ -36,6 +36,8 @@ function loadSummaries() {
 // The above is just testing for now
 // Make a new button just for populating all email summaries
 
+
+
 /* Carousel JS (Find a way to integrate into load button above)*/
 const carousel = document.getElementById('carousel');
 let currentIndex = 0;
@@ -44,7 +46,14 @@ let currentIndex = 0;
 function slideNext(emaildata) {
 
   currentIndex++;
-  addSlide(emaildata);
+
+  if(!emaildata){
+    addSlide();
+  }
+  else{
+    addSlide(emaildata);
+  }
+  
   updateSlide();
 }
 
@@ -68,17 +77,26 @@ function addSlide(emaildata) {
 
   const slide = document.createElement('div');
   slide.classList.add('slide');
-  slide.textContent = 'New Email Slide ' + (currentIndex + 1) + emaildata;
-  
+
+  if (!emaildata){
+    slide.textContent = 'New Email Slide ' + (currentIndex + 1) + " NEW";
+  }
+  else{
+    slide.textContent = 'New Email Slide ' + (currentIndex + 1) + emaildata;
+  }
+
   carousel.appendChild(slide);
 }
 
 // Get Email Summaries function
 document.addEventListener('DOMContentLoaded', (event) => {
 
-  //Email Getter object
+  //Test slide
+  addSlide();
+
+  //Email Getter object (THIS IS WHY SLIDES DONT SHOW, CUZ EMAIL GETTER JS AINT HERE)
   var emailGetter = new EmailGetter();
-  
+
   // Get the button by its ID and add an event listener
   // Initial Email Summary getter button
   var loadButton = document.getElementById('loadButton');
