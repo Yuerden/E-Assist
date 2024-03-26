@@ -6,10 +6,17 @@
 </head>
 <body>
     <h1>Welcome to the MainPage</h1>
-    <div id="emailSummaryContainer">
-        <button  id="loadButton" class="button">Load Summaries</button>
-        <button  id="nextEmail" class="button">></button>
-        <!-- Email summaries will be loaded here -->
+    <div id="emailContainer">
+        <button  id="loadButton" class="button">Get Next Email</button>
+        <button  id="summarize" class="button">Generate Summary</button>
+        <li>
+            Email:
+            <div id="emailBodyContainer"><!-- Email body will be displayed here --></div>
+        </li>
+        <li>
+            Summary:
+            <div id="emailSummaryContainer" ><!-- Email Summary will be displayed here --></div>
+        </li>
     </div>
         <!-- Email summaries will be loaded here -->
     <script type="module" src="mainpageScripts.js"></script>

@@ -1,35 +1,34 @@
+// mainpageScripts.js
+
 import {EmailGetter} from './getEmails.js';
-// This function will be called when the Load Summaries button is clicked
-function loadSummaries() {
-  console.log('summaries...');
+
+function displayEmailBody(emailData) {
+    // Assuming emailData contains the body of the email
+    document.getElementById('emailBodyContainer').textContent = emailData.body; // Use innerHTML if you need to render HTML content, but ensure it is sanitized to prevent XSS attacks.
+    displaySummary(""); //Wipes current summary
+}
+function displaySummary(summary) {
+  // Assuming emailData contains the body of the email
+  document.getElementById('emailSummaryContainer').textContent = summary; // Use innerHTML if you need to render HTML content, but ensure it is sanitized to prevent XSS attacks.
 }
 
-// This function simulates fetching email summaries, replace with your actual
-// data fetching logic function fetchEmailSummaries() {}
-
-// This function handles the display of email summaries on the page
-// function displayEmailSummaries(summaries) {}
-
-// Event listener for DOMContentLoaded to ensure the DOM is fully loaded before
-// trying to access elements
 document.addEventListener('DOMContentLoaded', (event) => {
-  var emailGetter = new EmailGetter();
-  // Get the button by its ID and add an event listener
-  var loadButton = document.getElementById('loadButton');
-  if (loadButton) {
-    loadButton.addEventListener('click', function() {
-      chrome.storage.local.get('token', function(result) {
-        emailGetter.getEmailList()
-      });
-    });
-
-  } else {
-    console.error('loadButton not found')
-  }
-  var nextEmailButton = document.getElementById('nextEmail');
-  if (nextEmailButton) {
-    nextEmailButton.addEventListener('click', function() {
-      emailGetter.getNextEmail()
-    });
-  }
+    var emailGetter = new EmailGetter();
+    
+    var loadButton = document.getElementById('loadButton');
+    if (loadButton) {
+        loadButton.addEventListener('click', function() {
+            // Here you should adapt to fetch and then display
+            emailGetter.getNextEmail().then(displayEmailBody); // Make sure getNextEmail() is correctly returning email data
+        });
+    } else {
+        console.error('loadButton not found')
+    }
+    
+    var nextEmailButton = document.getElementById('summarize');
+    if (nextEmailButton) {
+        nextEmailButton.addEventListener('click', function() {
+            emailGetter.summarizeEmail().then(displaySummary); // Same here for fetching next email
+        });
+    }
 });
