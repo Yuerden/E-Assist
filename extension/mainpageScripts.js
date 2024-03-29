@@ -19,10 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     console.error('loadButton not found')
   }
 });
-var inner_width = $('body').innerWidth();
-$(window).resize(function() {
-  inner_width = $('body').innerWidth();
-});
+
 /* Carousel JS (Find a way to integrate into load button above)*/
 const carousel = document.querySelector('.carousel');
 const prevButton = document.querySelector('.prev-button');
@@ -52,7 +49,7 @@ function updateSlide() {
   // const slideWidth = carousel.children[0].offsetWidth;
   // carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 
-  const offset = -currentIndex * inner_width; //This is weird as fuck gotta change later, left movement too big right move ment too small
+  const offset = -currentIndex * 100.6; //This is weird as fuck gotta change later, left movement too big right move ment too small 100.6
   carousel.style.transform = `translateX(${offset}%)`;
 
 }
@@ -60,10 +57,14 @@ function updateSlide() {
 // Function to add a new slide
 function addSlide() {
   const slide = document.createElement('div');
+  const slidee = document.createElement('div');
   slide.classList.add('slide');
-  slide.textContent = 'New Email Slide ' + (currentIndex + 1);
+  slide.textContent = 'Full Email' + (currentIndex + 1);
+  slidee.classList.add('slidesummary');
+  slidee.textContent = 'Summary Email' + (currentIndex + 1);
   
   carousel.appendChild(slide);
+  carousel.appendChild(slidee);
 }
 
 /* When Button is clicked run function  s respectively*/

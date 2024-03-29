@@ -65,7 +65,7 @@ body {
 #emailSummaryContainer{
     height: 95vh; 
     background: #ffffff; 
-    border-radius: 30px;
+    border-radius: 30px;   
 }
 
 /* Header styles */
@@ -115,7 +115,7 @@ body {
     padding: 10px;
     margin: 5px 0 20px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; /*#ccc*/ 
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -131,9 +131,18 @@ body {
     text-align: center;
     margin-top: 20px;
     font-size: 12px;
-    color: #777;
+    color: #777; /*#777*/
 }
 
+
+#emailcontainer{
+    position: left;
+    width: 100%;
+    height: 71%;
+    overflow: hidden;
+    display: flex; 
+    text-align: center;
+} 
 
 /* Carousel Styles */
 .carousel-container {
@@ -141,6 +150,7 @@ body {
     width: 100%;
     height: 71%;
     overflow: hidden;
+    
     display: flex; /*Something about display flex makes the slides get larger and larger*/
     text-align: center;
   }
@@ -153,14 +163,25 @@ body {
   
 .slide {
     flex: 0 0 auto;
-    width: 95%; /* Ensure each slide takes up the full width */
-    padding: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    width: 45%; /* Ensure each slide takes up the full width 95*/
+    /*padding: 20px;*/
+    margin-left: 5vw;
+    /*margin-right: 20px;*/
 
     background-color: #f0f0f0; /* Set background color */
-    border: 1px solid #ccc; /* Add border for visual separation */
+    border: 1px solid #919cfd;  /*Add border for visual separation */
 }
+.slidesummary {
+    flex: 0 0 auto;
+    width: 45%; /* Ensure each slide takes up the full width */
+    /*padding: 20px;*/
+    /*margin-left: 20px;*/
+    margin-right: 5vw;
+
+    background-color: #f0f0f0; /* Set background color */
+    border: 1px solid #919cfd;   /*Add border for visual separation */
+}
+
   
 .prev-button,
 .next-button {
