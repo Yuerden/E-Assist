@@ -2,23 +2,7 @@
 
 import {EmailGetter} from './getEmails.js';
 
-// Function to display the current email (Also clears the summary)
-function displayEmailBody(emailData) {
-  // Assuming emailData contains the body of the email
-  //displaySummary(""); //Wipes current summary
-
-  addSlide(emailData.body, 1);
-}
-
-//Function to display the summary of the current email
-function displaySummary(summary) {
-  // Assuming emailData contains the body of the email
-
-  //Add to slide
-  addSlide(summary, 0);
-
-}
-
+/* MAIN */
 //Button event listener main function
 document.addEventListener('DOMContentLoaded', (event) => {
     
@@ -64,10 +48,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
+// Function to display the current email (Also clears the summary)
+function displayEmailBody(emailData) {
+  // Assuming emailData contains the body of the email
+  //displaySummary(""); //Wipes current summary
 
+  addSlide(emailData.body, 1);
+}
 
+//Function to display the summary of the current email
+function displaySummary(summary) {
+  // Assuming emailData contains the body of the email
 
+  // Parse the text to make a list of points
+  const list = parseText(summary);
+  console.log(list);
 
+  //Send list of points to addSlide
+  addSlide(list, 0);
+
+}
 
 /* Carousel JS (Find a way to integrate into load button above)*/
 const carousel = document.getElementById('carousel');
@@ -91,13 +91,6 @@ function updateSlide() {
   carousel.style.transform = `translateX(${offset}%)`;
 }
 
-
-
-
-
-
-
-
 // Function to add a new slide (ADD DAIKI's CODE TO SPLIT SLIDES IN HALF)
 function addSlide(emaildata, checker) {
 
@@ -113,9 +106,25 @@ function addSlide(emaildata, checker) {
   else{
     const slide2 = document.createElement('div');
     slide2.classList.add('slide');
-    slide2.textContent = emaildata;
+
+    // Add each point from list of data to text
+    for (i = 0; i < emaildata.length; i++){
+      slide2.textContent += emaildata[i];
+    }
+
     carousel.appendChild(slide2);
   }
 }
 
+/* HELPERS */
 
+// Function to parse text based on a token and store in a list
+function parseText(text) {
+  // Split the text based on the token (SPLIT BROKEN FOR SOME REASON, MAYBE CHANGE DATA TYPE TO STRING)
+  const segments = text.split("*");
+
+  // Remove any empty segments
+  const parsedSegments = segments.filter(segment => segment.trim() !== '');
+
+  return parsedSegments;
+}
