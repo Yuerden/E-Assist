@@ -13,11 +13,11 @@ function displaySummary(summary) {
 }
 
 // Loading Icon Spinner:
-function showLoadingSpinner() {
-    document.getElementById('loadingSpinner').style.display = 'block';
+function showSpinner(where) {
+    document.getElementById(where).style.display = 'block';
 }
-function hideLoadingSpinner() {
-    document.getElementById('loadingSpinner').style.display = 'none';
+function hideSpinner(where) {
+    document.getElementById(where).style.display = 'none';
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -26,20 +26,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var loadButton = document.getElementById('loadButton');
     if (loadButton) {
         loadButton.addEventListener('click', function() {
-            showLoadingSpinner();
+            showSpinner('loadingSpinner');
             emailGetter.getNextEmail().then(emailData => {
                 displayEmailBody(emailData);
-                hideLoadingSpinner();
+                hideSpinner('loadingSpinner');
             }); // Make sure getNextEmail() is correctly returning email data
         });
     }
     var summarizeButton = document.getElementById('summarize');
     if (summarizeButton) {
         summarizeButton.addEventListener('click', function() {
-            showLoadingSpinner();
+            showSpinner('summarySpinner');
             emailGetter.summarizeEmail().then(summary => {
                 displaySummary(summary);
-                hideLoadingSpinner();
+                hideSpinner('summarySpinner');
             }); // Update your method to properly call summarizeEmail with the necessary arguments
         });
     }
