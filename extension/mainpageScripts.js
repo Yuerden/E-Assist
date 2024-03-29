@@ -25,20 +25,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     var loadButton = document.getElementById('loadButton');
     if (loadButton) {
-        showLoadingSpinner();
         loadButton.addEventListener('click', function() {
-            // Here you should adapt to fetch and then display
-            emailGetter.getNextEmail().then(displayEmailBody); // Make sure getNextEmail() is correctly returning email data
-            hideLoadingSpinner();
+            showLoadingSpinner();
+            emailGetter.getNextEmail().then(emailData => {
+                displayEmailBody(emailData);
+                hideLoadingSpinner();
+            }); // Make sure getNextEmail() is correctly returning email data
         });
     }
-    
-    var summarize = document.getElementById('summarize');
-    if (summarize) {
-        showLoadingSpinner();
-        summarize.addEventListener('click', function() {
-            emailGetter.summarizeEmail().then(displaySummary); // Same here for fetching next email
-            
+    var summarizeButton = document.getElementById('summarize');
+    if (summarizeButton) {
+        summarizeButton.addEventListener('click', function() {
+            showLoadingSpinner();
+            emailGetter.summarizeEmail().then(summary => {
+                displaySummary(summary);
+                hideLoadingSpinner();
+            }); // Update your method to properly call summarizeEmail with the necessary arguments
         });
     }
 });
