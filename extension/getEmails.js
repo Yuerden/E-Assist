@@ -103,11 +103,11 @@ export class EmailGetter {
       } else if (data.payload.body.data) {
         bodyData = this.decodeBase64(data.payload.body.data);
       }
-      emailData.body = bodyData;
+      emailData.body = bodyData.replace(/<[^>]+>/g, '').replace(/{[^>]+}/g, '');
 
       console.log('Processed email data:', emailData);
       // this.summarizeEmail(emailData)
-      this.currentEmailBody=emailData;
+      this.currentEmailBody = emailData;
       return emailData;
     } catch (error) {
       console.error('Error fetching email:', error);
@@ -125,19 +125,21 @@ export class EmailGetter {
   }
 
   async summarizeEmail() {
-    let summary = "";
-    if(this.currentEmailBody === null){
-      summary = 'There is no current email loaded at this time, please click Get Next Email Button'
+    let summary = '';
+    if (this.currentEmailBody === null) {
+      summary =
+          'There is no current email loaded at this time, please click Get Next Email Button'
       console.log(summary);
       return summary;
     }
-    if(this.GPTKey === 'FREE_VERSION'){
-      //do free version
-      summary = 'You are using the free version, currently no Summaries Available';
+    if (this.GPTKey === 'FREE_VERSION') {
+      // do free version
+      summary =
+          'You are using the free version, currently no Summaries Available';
       console.log(summary);
       return summary;
     }
-    //else continue using chatGPT bellow:
+    // else continue using chatGPT bellow:
 
     const url = 'https://api.openai.com/v1/chat/completions';
 
@@ -187,7 +189,7 @@ export class EmailGetter {
       }
 
       const jsonResponse = await response.json();
-      summary=jsonResponse.choices[0].message.content;
+      summary = jsonResponse.choices[0].message.content;
       console.log(summary);  // This is ChatGPT's response
       return summary;
     } catch (error) {
@@ -229,5 +231,4 @@ export class EmailGetter {
   //     }
   //   }
   // }
-
 }

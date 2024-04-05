@@ -110,6 +110,38 @@ function addSlide(emaildata, checker) {
     // Add each point from list of data to text
     for (let i = 0; i < emaildata.length; i++){
       slide2.textContent += emaildata[i];
+
+// // Loading Icon Spinner:
+// function showSpinner(where) {
+//     document.getElementById(where).style.display = 'block';
+// }
+// function hideSpinner(where) {
+//     document.getElementById(where).style.display = 'none';
+// }
+
+// document.addEventListener('DOMContentLoaded', (event) => {
+//     var emailGetter = new EmailGetter();
+    
+//     var loadButton = document.getElementById('loadButton');
+//     if (loadButton) {
+//         loadButton.addEventListener('click', function() {
+//             showSpinner('loadingSpinner');
+//             emailGetter.getNextEmail().then(emailData => {
+//                 displayEmailBody(emailData);
+//                 hideSpinner('loadingSpinner');
+//             }); // Make sure getNextEmail() is correctly returning email data
+//         });
+//     }
+//     var summarizeButton = document.getElementById('summarize');
+//     if (summarizeButton) {
+//         summarizeButton.addEventListener('click', function() {
+//             showSpinner('summarySpinner');
+//             emailGetter.summarizeEmail().then(summary => {
+//                 displaySummary(summary);
+//                 hideSpinner('summarySpinner');
+//             }); // Update your method to properly call summarizeEmail with the necessary arguments
+//         });
+
     }
 
     carousel.appendChild(slide2);
