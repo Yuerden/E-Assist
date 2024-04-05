@@ -54,27 +54,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
-// Function to display the current email (Also clears the summary)
-function displayEmailBody(emailData) {
-  // Assuming emailData contains the body of the email
-  //displaySummary(""); //Wipes current summary
-
-  addSlide(emailData.body, 1);
-}
-
-//Function to display the summary of the current email
-function displaySummary(summary) {
-  // Assuming emailData contains the body of the email
-
-  // Parse the text to make a list of points
-  const list = parseText(summary);
-  console.log(list);
-
-  //Send list of points to addSlide
-  addSlide(list, 0);
-
-}
-
 /* Carousel JS (Find a way to integrate into load button above)*/
 const carousel = document.getElementById('carousel');
 let currentIndex = 0;
@@ -97,31 +76,6 @@ function updateSlide() {
   carousel.style.transform = `translateX(${offset}%)`;
 }
 
-// Function to add a new slide (ADD DAIKI's CODE TO SPLIT SLIDES IN HALF)
-function addSlide(emaildata, checker) {
-
-  //If Email Data then add text to slide 1 in pair
-  if (checker == 1) {
-    const slide1 = document.createElement('div');
-    slide1.classList.add('slide');
-    slide1.textContent = emaildata;
-    carousel.appendChild(slide1);
-  }
-
-  //If Summary Data then add text to slide 2 in pair
-  else{
-    const slide2 = document.createElement('div');
-    slide2.classList.add('slide');
-
-    // Add each point from list of data to text
-    for (let i = 0; i < emaildata.length; i++){
-      slide2.textContent += emaildata[i];
-    }
-
-    carousel.appendChild(slide2);
-  }
-}
-
 /* HELPERS */
 
 // Function to parse text based on a token and store in a list
@@ -134,15 +88,6 @@ function parseText(text) {
 
   return parsedSegments;
 }
-
-function showSpinner(where) {
-    document.getElementById(where).style.display = 'block';
-}
-function hideSpinner(where) {
-    document.getElementById(where).style.display = 'none';
-}
-
-
 
 // Johns new shit
 function addSlideWithSpinner() {
