@@ -108,7 +108,7 @@ function addSlide(emaildata, checker) {
     slide2.classList.add('slide');
 
     // Add each point from list of data to text
-    for (i = 0; i < emaildata.length; i++){
+    for (let i = 0; i < emaildata.length; i++){
       slide2.textContent += emaildata[i];
     }
 
@@ -121,7 +121,7 @@ function addSlide(emaildata, checker) {
 // Function to parse text based on a token and store in a list
 function parseText(text) {
   // Split the text based on the token (SPLIT BROKEN FOR SOME REASON, MAYBE CHANGE DATA TYPE TO STRING)
-  const segments = text.split("*");
+  const segments = text.split("\n");
 
   // Remove any empty segments
   const parsedSegments = segments.filter(segment => segment.trim() !== '');
