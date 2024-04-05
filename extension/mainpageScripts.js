@@ -13,8 +13,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var getEmail = document.getElementById('getEmail');
     if (getEmail) {
       getEmail.addEventListener('click', function() {
-        // Here you should adapt to fetch and then display
-        emailGetter.getNextEmail().then(displayEmailBody); // Make sure getNextEmail() is correctly returning email data
+        addSlideWithSpinner();
+        emailGetter.getNextEmail().then(emailData => {
+            updateSlideContent(emailData.body);
+        }); // Make sure getNextEmail() is correctly returning email data
+
       });
     } 
     else {
@@ -25,7 +28,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var getEmailSummary = document.getElementById('summarize');
     if (getEmailSummary) {
       getEmailSummary.addEventListener('click', function() {
-        emailGetter.summarizeEmail().then(displaySummary); // Same here for fetching next email
+        addSlideWithSpinner();
+        emailGetter.summarizeEmail().then(summary => {
+            updateSlideContent(summary);
+        }); // Same here for fetching next email
       });
     }
 
@@ -110,38 +116,6 @@ function addSlide(emaildata, checker) {
     // Add each point from list of data to text
     for (let i = 0; i < emaildata.length; i++){
       slide2.textContent += emaildata[i];
-
-// // Loading Icon Spinner:
-// function showSpinner(where) {
-//     document.getElementById(where).style.display = 'block';
-// }
-// function hideSpinner(where) {
-//     document.getElementById(where).style.display = 'none';
-// }
-
-// document.addEventListener('DOMContentLoaded', (event) => {
-//     var emailGetter = new EmailGetter();
-    
-//     var loadButton = document.getElementById('loadButton');
-//     if (loadButton) {
-//         loadButton.addEventListener('click', function() {
-//             showSpinner('loadingSpinner');
-//             emailGetter.getNextEmail().then(emailData => {
-//                 displayEmailBody(emailData);
-//                 hideSpinner('loadingSpinner');
-//             }); // Make sure getNextEmail() is correctly returning email data
-//         });
-//     }
-//     var summarizeButton = document.getElementById('summarize');
-//     if (summarizeButton) {
-//         summarizeButton.addEventListener('click', function() {
-//             showSpinner('summarySpinner');
-//             emailGetter.summarizeEmail().then(summary => {
-//                 displaySummary(summary);
-//                 hideSpinner('summarySpinner');
-//             }); // Update your method to properly call summarizeEmail with the necessary arguments
-//         });
-
     }
 
     carousel.appendChild(slide2);
@@ -159,4 +133,31 @@ function parseText(text) {
   const parsedSegments = segments.filter(segment => segment.trim() !== '');
 
   return parsedSegments;
+}
+
+function showSpinner(where) {
+    document.getElementById(where).style.display = 'block';
+}
+function hideSpinner(where) {
+    document.getElementById(where).style.display = 'none';
+}
+
+
+
+// Johns new shit
+function addSlideWithSpinner() {
+    const slide = document.createElement('div');
+    slide.classList.add('slide');
+    slide.innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>'; // Add your spinner here
+    carousel.appendChild(slide);
+    updateSlide(); // Move to the new slide with the spinner
+}
+// Function to update the content of the latest slide
+function updateSlideContent(content) {
+    const slides = carousel.getElementsByClassName('slide');
+    const latestSlide = slides[slides.length - 1]; // Get the last slide
+    if (latestSlide) {
+        latestSlide.innerHTML = ''; // Clear the spinner
+        latestSlide.textContent = content; // Add the new content
+    }
 }
