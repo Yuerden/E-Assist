@@ -34,13 +34,13 @@ body {
 
 .title{
 
-    display: flex;
+    /*display: flex;*/
+    text-align: center;
     color: black; 
     font-size: 80px; 
     font-family: League Spartan; 
     font-weight: 400; 
     margin:10px;
-
 }
 
 .total_unread{
@@ -50,6 +50,17 @@ body {
     font-family: League Spartan; 
     font-weight: 400; 
     margin:10px;
+    height: 40%;
+    background-color: #57EBFF;
+    border-radius: 25px;
+}
+
+.Background{ 
+    border-radius: 25px;
+    justify-content: center; 
+    width: 100%;
+    height: 75%;
+    background-color:#57EBFF;
 }
 
 .centered{
@@ -149,8 +160,7 @@ body {
     position: relative;
     width: 100%;
     height: 71%;
-    overflow: hidden;
-    
+    overflow: hidden;   
     display: flex; /*Something about display flex makes the slides get larger and larger*/
     text-align: center;
   }
@@ -163,23 +173,21 @@ body {
   
 .slide {
     flex: 0 0 auto;
-    width: 45%; /* Ensure each slide takes up the full width 95*/
-    /*padding: 20px;*/
+    width: 45%; 
     margin-left: 5vw;
-    /*margin-right: 20px;*/
-
-    background-color: #f0f0f0; /* Set background color */
-    border: 1px solid #919cfd;  /*Add border for visual separation */
+    margin-top: 5vh;
+    height: 100%;
+    background-color: #f0f0f0; 
+    border: 1px solid #919cfd;  
 }
 .slidesummary {
     flex: 0 0 auto;
-    width: 45%; /* Ensure each slide takes up the full width */
-    /*padding: 20px;*/
-    /*margin-left: 20px;*/
+    width: 45%; 
+    margin-top: 5vh;
     margin-right: 5vw;
-
-    background-color: #f0f0f0; /* Set background color */
-    border: 1px solid #919cfd;   /*Add border for visual separation */
+    height: 100%;
+    background-color: #f0f0f0; 
+    border: 1px solid #919cfd;   
 }
 
   
