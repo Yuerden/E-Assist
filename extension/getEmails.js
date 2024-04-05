@@ -162,9 +162,9 @@ export class EmailGetter {
         Please format the summary as follows:
         - Subject: [Subject of the Email]
         - Key Points:
-          - [Point 1]
-          - [Point 2]
-          - [And so on...]
+          * [Point 1]
+          * [Point 2]
+          * [And so on...]
         - Action Required: [What needs to be done, by whom, and by when]
         - Sentiment: [Overall tone of the email]
         - Additional Notes: [Any other important details]
