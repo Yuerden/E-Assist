@@ -194,6 +194,14 @@ function displayEmailBody(emailData) {
   //displaySummary(""); //Wipes current summary
 
   addSlide(emailData.body, 1);
+  const slides = carousel.getElementsByClassName('slide');
+
+  const latestSlide = slides[slides.length - 1]; // Get the last slide
+  if (latestSlide) {
+      latestSlide.innerHTML = ''; // Clear the spinner
+      latestSlide.textContent = content; // Add the new content
+  }
+  
 }
 
 //Function to display the summary of the current email
@@ -252,7 +260,7 @@ function addSlide(emaildata, checker) {
 
     // Add each point from list of data to text
     for (let i = 0; i < emaildata.length; i++){
-      slide2.textContent += emaildata[i];
+      slide2.textContent += emaildata[i] + "\n";
     }
 
     // slide2.innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>'; // Add your spinner here
