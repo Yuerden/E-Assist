@@ -89,10 +89,20 @@ function parseText(text) {
   return parsedSegments;
 }
 
+// FIX SPLIT SCREEN BY FIXING AND IMPLEMENTING MY OLD ADDSLIDE()
+let check = 0
 // Johns new shit
 function addSlideWithSpinner() {
     const slide = document.createElement('div');
-    slide.classList.add('slide');
+
+    if(check == 0){
+      slide.classList.add('slide');
+      check++;
+    }
+    else{
+      slide.classList.add('slide_summary');
+      check--;
+    }
     slide.innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>'; // Add your spinner here
     carousel.appendChild(slide);
     updateSlide(); // Move to the new slide with the spinner
