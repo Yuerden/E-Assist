@@ -148,13 +148,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
   //EmailGetter Object that utilizes functions in getEmails.js
   var emailGetter = new EmailGetter();
+  var sameEmail = false;
     
     //Load Button logic for loading and getting the next email
     var getEmail = document.getElementById('getEmail');
     if (getEmail) {
       getEmail.addEventListener('click', function() {
-        // Here you should adapt to fetch and then display
-        emailGetter.getNextEmail().then(displayEmailBody); // Make sure getNextEmail() is correctly returning email data
+
+
+        sameEmail = false;
+        addSlideWithSpinner();
+        slideCurrent();
+        emailGetter.getNextEmail().then(emailData => {
+            updateSlideContent(emailData.body);
+        });
       });
     } 
     else {
@@ -165,7 +172,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var getEmailSummary = document.getElementById('summarize');
     if (getEmailSummary) {
       getEmailSummary.addEventListener('click', function() {
-        emailGetter.summarizeEmail().then(displaySummary); // Same here for fetching next email
+        !sameEmail ? addSlideWithSpinner() : carousel.getElementsByClassName('slide')[carousel.getElementsByClassName('slide').length - 1].innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>';
+        slideCurrent();
+        emailGetter.summarizeEmail().then(summary => {
+            updateSlideContent(summary);
+        });
+        sameEmail=true;
       });
     }
 
@@ -173,7 +185,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var nextSlideButton = document.getElementById('nextSlide');
     if (nextSlideButton) {
       nextSlideButton.addEventListener('click', function() {
-        //LOGIC HERE
         slideNext();
       });
     }
@@ -222,7 +233,7 @@ const carousel = document.getElementById('carousel');
 let currentIndex = 0;
 
 /*Next Slide Function*/
-function slideNext(emaildata) {
+function slideNext() {
   currentIndex += 1;
   updateSlide();
 }
@@ -231,6 +242,11 @@ function slideNext(emaildata) {
 function slidePrev() {
   currentIndex = (currentIndex - 1 + carousel.children.length) % carousel.children.length;
   updateSlide();
+}
+
+function slideCurrent() {
+  currentIndex = carousel.children.length-1;
+  updateSlide(); 
 }
 
 /*moves/updates carousel*/
