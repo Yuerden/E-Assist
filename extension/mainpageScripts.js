@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var nextSlideButton = document.getElementById('nextSlide');
     if (nextSlideButton) {
       nextSlideButton.addEventListener('click', function() {
-        //LOGIC HERE
         slideNext();
       });
     }
