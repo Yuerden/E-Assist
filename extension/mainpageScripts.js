@@ -122,7 +122,7 @@ function updateSlideContent_summary(content) {
   const latestSlide = slides[slides.length - 1]; // Get the last slide
   if (latestSlide) {
       latestSlide.innerHTML = ''; // Clear the spinner
-      latestSlide.textContent = content; // Add the new content
+      latestSlide.innerHTML = content; // Add the new content
   }
 }
 
@@ -147,21 +147,37 @@ function summaryParse(summary){
 
   //EVENTUALLY ADD WHATEVER STYLING WE WANT FOR THE PARSED SUMMARY HERE
 
-  // Add new lines
-  for (var i = 0; i < list.length; i++) {
-    // Add a new line to the end of each string
-    list[i] += "\n";
-  }
+  // // Add new lines
+  // for (var i = 0; i < list.length; i++) {
+  //   // Add a new line to the end of each string
+  //   list[i] += "\n";
+  // }
 
 
-  // Combine final summary
-  var final_summary = ""
-  for (var i = 0; i < list.length; i++) {
-    final_summary += list[i];
-  }
+  // // Combine final summary
+  // var final_summary = ""
+  // for (var i = 0; i < list.length; i++) {
+  //   final_summary += list[i];
+  // }
 
-  console.log("Updated List:\n", list);
-  console.log("Updated Summary:\n", final_summary);
+  // Create an unordered list element
+  var summary_list = document.createElement("ul");
+
+  // Iterate over each item in the list
+  list.forEach(function(item) {
+    // Create a list item element
+    var summary_part = document.createElement("li");
+    
+    // Set the text content of the list item
+    summary_part.textContent = item;
+
+    // Append the list item to the unordered list
+    summary_list.appendChild(summary_part);
+  });
+
+  console.log("Old List:\n", list);
+  console.log("Updated List:\n", summary_list);
   //Send finished summary text to updateSlideContent
-  updateSlideContent_summary(final_summary);
+  // var test = "<p>HI<p>"
+  updateSlideContent_summary(summary_list.innerHTML);
 }
