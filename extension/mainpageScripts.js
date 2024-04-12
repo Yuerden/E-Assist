@@ -88,8 +88,10 @@ function slideCurrent() {
 
 /*moves/updates carousel*/
 function updateSlide() {
-  const offset = -currentIndex * 100.57; //This is weird as fuck gotta change later, left movement too big right move ment too small
-  carousel.style.transform = `translateX(${offset}%)`;
+  // Assuming each slide (including margins/gap) takes up 100% of the carousel's width
+  const slideWidth = carousel.offsetWidth; // This gets the width of the carousel container
+  const offset = -currentIndex * slideWidth; // This calculates the offset based on the current index
+  carousel.style.transform = `translateX(${offset}px)`; // Use pixels for transform as offsetWidth is in pixels
 }
 
 
