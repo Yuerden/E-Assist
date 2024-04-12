@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         sameEmail = false;
         addSlideWithSpinner();
+        addSlideSummary();
         slideCurrent();
         emailGetter.getNextEmail().then(emailData => {
             updateSlideContent(emailData.body);
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var getEmailSummary = document.getElementById('summarize');
     if (getEmailSummary) {
       getEmailSummary.addEventListener('click', function() {
-        !sameEmail ? addSlideWithSpinner_Summary() : carousel.getElementsByClassName('slide_summary')[carousel.getElementsByClassName('slide_summary').length - 1].innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>';
+        carousel.getElementsByClassName('slide_summary')[carousel.getElementsByClassName('slide_summary').length - 1].innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>';
         slideCurrent();
         emailGetter.summarizeEmail().then(summary => {
           summaryParse(summary);
@@ -80,7 +81,8 @@ function slidePrev() {
 }
 
 function slideCurrent() {
-  currentIndex = carousel.children.length-1;
+  currentIndex = (carousel.children.length-1)/2-((carousel.children.length-1)%2)/2;
+  console.log(carousel.children.length-1);
   updateSlide(); 
 }
 
@@ -99,10 +101,9 @@ function addSlideWithSpinner() {
   carousel.appendChild(slide);
   updateSlide(); // Move to the new slide with the spinner
 }
-function addSlideWithSpinner_Summary() {
+function addSlideSummary() {
   const slide = document.createElement('div');
   slide.classList.add('slide_summary');
-  slide.innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>'; // Add your spinner here
   carousel.appendChild(slide);
   updateSlide(); // Move to the new slide with the spinner
 }
