@@ -178,20 +178,6 @@ body {
     font-size: 18px;
 }
 
-
-.slide_summary{
-    flex: 0 0 auto;
-    width: 45%; 
-    margin-top: 5vh;
-    margin-right: 5vw;
-    height: 100%;
-    background-color: #f0f0f0; 
-    border: 1px solid #ccc;
-
-    overflow-y: auto;
-    font-size: 18px;
-} 
-
 .prev-button,
 .next-button, .email-button {
     position: absolute;
