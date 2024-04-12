@@ -172,10 +172,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var getEmailSummary = document.getElementById('summarize');
     if (getEmailSummary) {
       getEmailSummary.addEventListener('click', function() {
-        !sameEmail ? addSlideWithSpinner() : carousel.getElementsByClassName('slide')[carousel.getElementsByClassName('slide').length - 1].innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>';
+        !sameEmail ? addSlideWithSpinner_Summary() : carousel.getElementsByClassName('slide_summary')[carousel.getElementsByClassName('slide_summary').length - 1].innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>';
         slideCurrent();
         emailGetter.summarizeEmail().then(summary => {
-            updateSlideContent(summary);
+          summaryParse(summary);
+          
         });
         sameEmail=true;
       });
@@ -199,11 +200,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
-// Function to display the current email (Also clears the summary)
-function displayEmailBody(emailData) {
-  // Assuming emailData contains the body of the email
-  //displaySummary(""); //Wipes current summary
 
+<<<<<<< Updated upstream
   addSlide(emailData.body, 1);
   const slides = carousel.getElementsByClassName('slide');
 
@@ -227,6 +225,9 @@ function displaySummary(summary) {
   addSlide(list, 0);
 
 }
+=======
+/* HELPERS */
+>>>>>>> Stashed changes
 
 /* Carousel JS (Find a way to integrate into load button above)*/
 const carousel = document.getElementById('carousel');
@@ -255,6 +256,7 @@ function updateSlide() {
   carousel.style.transform = `translateX(${offset}%)`;
 }
 
+<<<<<<< Updated upstream
 // Function to add a new slide (ADD DAIKI's CODE TO SPLIT SLIDES IN HALF)
 function addSlide(emaildata, checker) {
 
@@ -283,9 +285,41 @@ function addSlide(emaildata, checker) {
     carousel.appendChild(slide2);
     updateSlide();
   }
+=======
+// New Add Slide Function (Includes spinner)
+function addSlideWithSpinner() {
+  const slide = document.createElement('div');
+  slide.classList.add('slide');
+  slide.innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>'; // Add your spinner here
+  carousel.appendChild(slide);
+  updateSlide(); // Move to the new slide with the spinner
+}
+function addSlideWithSpinner_Summary() {
+  const slide = document.createElement('div');
+  slide.classList.add('slide_summary');
+  slide.innerHTML = '<div id="slideSpinner" class="loading-spinner"></div>'; // Add your spinner here
+  carousel.appendChild(slide);
+  updateSlide(); // Move to the new slide with the spinner
+>>>>>>> Stashed changes
 }
 
-/* HELPERS */
+// Function to update the content of the latest slide
+function updateSlideContent(content) {
+  const slides = carousel.getElementsByClassName('slide');
+  const latestSlide = slides[slides.length - 1]; // Get the last slide
+  if (latestSlide) {
+      latestSlide.innerHTML = ''; // Clear the spinner
+      latestSlide.textContent = content; // Add the new content
+  }
+}
+function updateSlideContent_summary(content) {
+  const slides = carousel.getElementsByClassName('slide_summary');
+  const latestSlide = slides[slides.length - 1]; // Get the last slide
+  if (latestSlide) {
+      latestSlide.innerHTML = ''; // Clear the spinner
+      latestSlide.textContent = content; // Add the new content
+  }
+}
 
 // Function to parse text based on a token and store in a list
 function parseText(text) {
@@ -296,4 +330,37 @@ function parseText(text) {
   const parsedSegments = segments.filter(segment => segment.trim() !== '');
 
   return parsedSegments;
+<<<<<<< Updated upstream
 }
+=======
+}
+
+// Function for parsing summary
+function summaryParse(summary){
+  
+  // Parse the text to make a list of points
+  var list = parseText(summary);
+  console.log(list);
+
+  //EVENTUALLY ADD WHATEVER STYLING WE WANT FOR THE PARSED SUMMARY HERE
+
+  // Add new lines
+  for (var i = 0; i < list.length; i++) {
+    // Add a new line to the end of each string
+    list[i] += "\n";
+  }
+
+
+  // Combine final summary
+  var final_summary = ""
+  for (var i = 0; i < list.length; i++) {
+    final_summary += list[i];
+  }
+
+  console.log("Updated List:\n", list);
+  console.log("Updated Summary:\n", final_summary);
+  //Send finished summary text to updateSlideContent
+  updateSlideContent_summary(final_summary);
+}
+
+>>>>>>> Stashed changes
