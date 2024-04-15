@@ -34,8 +34,7 @@ body {
 
 .title{
 
-    /*display: flex;*/
-    text-align: center;
+    display: flex;
     color: black; 
     font-size: 80px; 
     font-family: League Spartan; 
@@ -50,7 +49,6 @@ body {
     font-family: League Spartan; 
     font-weight: 400; 
     margin:10px;
-    height: 40%;
     background-color: #57EBFF;
     border-radius: 25px;
 }
@@ -58,7 +56,8 @@ body {
 .Background{ 
     border-radius: 25px;
     justify-content: center; 
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     height: 75%;
     background-color:#57EBFF;
 }
@@ -159,7 +158,7 @@ body {
 .carousel-container {
     position: relative;
     width: 100%;
-    height: 71%;
+    height: 90%;
     overflow: hidden;   
     display: flex; /*Something about display flex makes the slides get larger and larger*/
     text-align: center;
@@ -175,21 +174,43 @@ body {
     flex: 0 0 auto;
     width: 45%; 
     margin-left: 5vw;
-    margin-top: 5vh;
+    margin-top: 1vh;
     height: 100%;
     background-color: #f0f0f0; 
-    border: 1px solid #919cfd;  
+    border: 3px solid #919cfd;  
 }
 .slidesummary {
     flex: 0 0 auto;
     width: 45%; 
     margin-top: 5vh;
-    margin-right: 5vw;
+    margin-right: 1vw;
     height: 100%;
     background-color: #f0f0f0; 
-    border: 1px solid #919cfd;   
+    border: 3px solid #919cfd;   
+}
+/*
+.Email-box {
+    text-align: left;
+    color: rgb(253, 250, 250); 
+    font-size: 30px; 
+    font-family: League Spartan; 
+    font-weight: 400; 
+    margin:1px;
 }
 
+.summary-box{
+    color: rgb(253, 250, 250); 
+    font-size: 30px; 
+    font-family: League Spartan; 
+    font-weight: 400; 
+    text-align: right;
+   
+}
+
+
+<div id = "Email-box"> Full Email</div>
+            <div id = "summary-box"> Email Summary</div>
+            */
   
 .prev-button,
 .next-button {
