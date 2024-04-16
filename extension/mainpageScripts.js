@@ -114,14 +114,13 @@ function updateSlideContent(content) {
   const latestSlide = slides[slides.length - 1]; // Get the last slide
   if (latestSlide) {
       latestSlide.innerHTML = ''; // Clear the spinner
-      latestSlide.textContent = content; // Add the new content
+      latestSlide.textContent = removeHtmlTags(content); // Add the new content
   }
 }
 function updateSlideContent_summary(content) {
   const slides = carousel.getElementsByClassName('slide_summary');
   const latestSlide = slides[slides.length - 1]; // Get the last slide
   if (latestSlide) {
-      latestSlide.innerHTML = ''; // Clear the spinner
       latestSlide.innerHTML = content; // Add the new content
   }
 }
@@ -147,19 +146,6 @@ function summaryParse(summary){
 
   //EVENTUALLY ADD WHATEVER STYLING WE WANT FOR THE PARSED SUMMARY HERE
 
-  // // Add new lines
-  // for (var i = 0; i < list.length; i++) {
-  //   // Add a new line to the end of each string
-  //   list[i] += "\n";
-  // }
-
-
-  // // Combine final summary
-  // var final_summary = ""
-  // for (var i = 0; i < list.length; i++) {
-  //   final_summary += list[i];
-  // }
-
   // Create an unordered list element
   var summary_list = document.createElement("ul");
 
@@ -169,15 +155,18 @@ function summaryParse(summary){
     var summary_part = document.createElement("li");
     
     // Set the text content of the list item
-    summary_part.textContent = item;
+    summary_part.innerHTML = "<p>" + item + "</p>";
 
     // Append the list item to the unordered list
     summary_list.appendChild(summary_part);
   });
-
-  console.log("Old List:\n", list);
-  console.log("Updated List:\n", summary_list);
+  console.log("Updated List HTML:\n", summary_list);
   //Send finished summary text to updateSlideContent
   // var test = "<p>HI<p>"
   updateSlideContent_summary(summary_list.innerHTML);
+}
+
+// Function to remove all html from the email data (NEED TO IMPLEMENT)
+function removeHtmlTags(input) {
+  return input.replace(/<[^>]*>|&nbsp;/g, '');
 }
