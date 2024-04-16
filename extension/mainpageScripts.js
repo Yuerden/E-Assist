@@ -3,6 +3,9 @@
 import {EmailGetter} from './getEmails.js';
 
 /* MAIN */
+
+var total_unread_emails = -1;
+
 //Button event listener main function
 document.addEventListener('DOMContentLoaded', (event) => {
     
@@ -22,6 +25,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
         slideCurrent();
         emailGetter.getNextEmail().then(emailData => {
             updateSlideContent(emailData.body);
+        });
+
+
+        //Set Total emails counters
+        emailGetter.getEmailList().then(emaillength =>{
+
+          if(total_unread_emails == -1){
+            total_unread_emails = emaillength;
+          }
+          else{
+            total_unread_emails -= 1;
+          }
+          const total = document.getElementById('total_unread');
+          total.textContent = "Total Unread: " + total_unread_emails;
+          console.log(total_unread_emails);
         });
       });
     } 
@@ -146,21 +164,6 @@ function summaryParse(summary){
   // Parse the text to make a list of points
   var list = parseText(summary);
   console.log(list);
-
-  //EVENTUALLY ADD WHATEVER STYLING WE WANT FOR THE PARSED SUMMARY HERE
-
-  // // Add new lines
-  // for (var i = 0; i < list.length; i++) {
-  //   // Add a new line to the end of each string
-  //   list[i] += "\n";
-  // }
-
-
-  // // Combine final summary
-  // var final_summary = ""
-  // for (var i = 0; i < list.length; i++) {
-  //   final_summary += list[i];
-  // }
 
   // Create an unordered list element
   var summary_list = document.createElement("ul");

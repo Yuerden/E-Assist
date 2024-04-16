@@ -44,6 +44,9 @@ export class EmailGetter {
 
       console.log(
           'Estimated number of total messages:', data.resultSizeEstimate);
+
+      return data.resultSizeEstimate;
+
     } catch (error) {
       console.error('Error fetching messages:', error);
     }

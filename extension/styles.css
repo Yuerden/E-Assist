@@ -43,7 +43,7 @@ body {
 
 }
 
-.total_unread{
+#total_unread{
     display: flex;
     color: black; 
     font-size: 30px; 
