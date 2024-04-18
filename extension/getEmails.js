@@ -13,6 +13,7 @@ export class EmailGetter {
     this.currentEmailBody = null;
   }
 
+  // this is the async initEmailList function
   async initEmailList() {
     await this.getEmailList();
   }
