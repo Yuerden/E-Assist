@@ -1,26 +1,29 @@
 export class EmailGetter {
   constructor() {
+    // need to retrieve the authorization token 
     chrome.storage.local.get('token', (result) => {
-      this.token = result.token;
-      this.initEmailList();
+      this.token = result.token; //store the current token
+      this.initEmailList(); // initialize email list
     });
+    // retrieve OpenAI API key
     chrome.storage.local.get('openaiApiKey', (result) => {
-      this.GPTKey = result.openaiApiKey;
+      this.GPTKey = result.openaiApiKey; // store current API key
     });
-    this.messageList = null;
-    this.nextPageToken = null;
-    this.emailPointer = 0;
-    this.currentEmailBody = null;
+    // initialize variables for email navigation and processing
+    this.messageList = null; 
+    this.nextPageToken = null; 
+    this.emailPointer = 0; 
+    this.currentEmailBody = null; 
   }
 
-  // this is the async initEmailList function
+  // Asynchronously initializes email list
   async initEmailList() {
-    await this.getEmailList();
+    await this.getEmailList(); // calls getEmailList to fetch messages
   }
-
+// Asynchronously fetches emails from gmail API 
   async getEmailList() {
     const headers = new Headers();
-    headers.append('Authorization', `Bearer ${this.token}`);
+    headers.append('Authorization', `Bearer ${this.token}`); //set authorization header
 
     let url = `https://gmail.googleapis.com/gmail/v1/users/me/messages`;
     if (this.nextPageToken) {
