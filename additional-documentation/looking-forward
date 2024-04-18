@@ -1,1 +1,9 @@
+Our initial vision for SmartMail was for it to be the ultimate email assistant. SmartMail is an extention which would facilitate reading all the emails in your inbox. It gives a brief summary of each email recieved since the last scan, and it can autogenerate responses, which can be edited if needed, or a button can be clicked to lead to a response page. 
 
+Over the course of the semester, we completed the summary assistant. The front end and back end were integrated to allow for a summary of each email that has been scanned.
+
+The back end for responding to emails has already been coded, but there has been no front end coded to match it. This would be the first next step in the project projectory. 
+
+Subsequent features which have also been considered is an autoprioritization of the emails. This will allow for emails which mention specific dates or have seemingly urgent content to be responded to first. Additionally, SmartMail could be linked to a calendar to auto-input any dates from the emails into the calendars, as well as an automatic RSVP system. There could also be an auto To-Do list, where you can add tasks from emails to the list, or add responding to the list.
+
+In the future, there are many accessibility features we would like to conisider integrating. The main feature would be a "text-to-speech" option, as well as voice navigation. This voice navigation would automatically match standard email format as well and would have voice options for formatting techniques. 
