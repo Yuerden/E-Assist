@@ -24,7 +24,7 @@ export class EmailGetter {
   async getEmailList() {
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${this.token}`); //set authorization header
-
+    // request URL 
     let url = `https://gmail.googleapis.com/gmail/v1/users/me/messages`;
     if (this.nextPageToken) {
       url += `?pageToken=${this.nextPageToken}`;
@@ -36,12 +36,15 @@ export class EmailGetter {
     };
 
     try {
+      // fetch email list from gmail API
       const response = await fetch(url, requestOptions);
       const data = await response.json();
+      // update message list and email pointer
       if (data.messages && data.messages.length > 0) {
         this.messageList = data.messages;
         this.emailPointer = 0;
       }
+      // update token if needed
       if (data.nextPageToken) {
         this.nextPageToken = data.nextPageToken;
       }
@@ -55,15 +58,16 @@ export class EmailGetter {
       console.error('Error fetching messages:', error);
     }
   }
-
+// fetches next email from message list, processes its details
   async getNextEmail() {
+    // check if email list needs to be refreshed or initalized
     if (!this.messageList || this.emailPointer >= this.messageList.length) {
       await this.getEmailList();
       if (!this.messageList || this.emailPointer >= this.messageList.length) {
         return null;
       }
     }
-
+    // get the current email using its ID and advance pointer
     const emailId = this.messageList[this.emailPointer].id;
     this.emailPointer += 1;
 
@@ -76,6 +80,7 @@ export class EmailGetter {
     };
 
     try {
+      // fetch full email details
       const response = await fetch(
           `https://gmail.googleapis.com/gmail/v1/users/me/messages/${
               emailId}?format=full`,
@@ -99,7 +104,7 @@ export class EmailGetter {
         }
       });
 
-      // Decode email body
+      // Decode email body from encoded format
       let bodyData = '';
       if (data.payload.parts) {
         data.payload.parts.forEach(part => {
@@ -121,7 +126,7 @@ export class EmailGetter {
       return null;
     }
   }
-
+// Decodes base64 encoded string to a readable format
   decodeBase64(encodedString) {
     const decodedString =
         atob(encodedString.replace(/-/g, '+').replace(/_/g, '/'));
